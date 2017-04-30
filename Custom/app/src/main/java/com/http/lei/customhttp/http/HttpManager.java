@@ -21,6 +21,8 @@ public class HttpManager {
 
     public static final int CONTENT_LENGTH_ERROR_CODE = 2;
 
+    public static final int TASK_RUNNING_ERROR = 3;
+
     private Context mContext;
 
     private OkHttpClient mClient;
@@ -121,8 +123,8 @@ public class HttpManager {
         });
     }
 
+
     /**
-     * 异步下载文件
      * @param url
      * @param callback
      */
@@ -131,6 +133,8 @@ public class HttpManager {
         mClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
+
+                callback.onFailure(call,e);
 
             }
 

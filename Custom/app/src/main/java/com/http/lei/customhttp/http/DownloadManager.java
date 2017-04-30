@@ -1,7 +1,12 @@
 package com.http.lei.customhttp.http;
 
 import android.content.Context;
+
+import com.http.lei.customhttp.DownloadTask;
+
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -12,7 +17,7 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 /**
- * 线程管理类
+ * 下载线程管理类
  * Created by lei on 2017/4/26.
  */
 public class DownloadManager {
@@ -21,11 +26,13 @@ public class DownloadManager {
 
     public static DownloadManager sManager;
 
+    private HashSet<DownloadTask> mHashSet = new HashSet<>();
+
     private final static int CORE_POOL_SIZE = 2;
 
     private final static int MAX_POOL_SIZE = 2;
 
-    private final static ThreadPoolExecutor sThreadPool = new ThreadPoolExecutor(CORE_POOL_SIZE,MAX_POOL_SIZE,60, TimeUnit.MILLISECONDS, new SynchronousQueue<Runnable>(), new ThreadFactory(){
+    private final static ThreadPoolExecutor sThreadPool = new ThreadPoolExecutor(CORE_POOL_SIZE,MAX_POOL_SIZE,60, TimeUnit.MILLISECONDS, new LinkedBlockingDeque<Runnable>(), new ThreadFactory(){
 
                 private AtomicInteger mInteger = new AtomicInteger(1);
                 @Override
@@ -41,12 +48,29 @@ public class DownloadManager {
 
     private DownloadManager(){}
 
+    /**
+     * 移除任务
+     * @param task
+     */
+    private void finish(DownloadTask task){
+        mHashSet.remove(task);
+    }
 
     public void download(final String url, final DownloadCallback callback){
+
+        final DownloadTask task = new DownloadTask(url,callback);
+        if (mHashSet.contains(task)){
+            callback.fail(HttpManager.TASK_RUNNING_ERROR,"");
+            return;
+        }
+
+        mHashSet.add(task);
+
         HttpManager.getInstance().asyncRequest(url,new Callback(){
             @Override
             public void onFailure(Call call, IOException e) {
 
+                finish(task);
             }
 
             @Override
@@ -59,11 +83,12 @@ public class DownloadManager {
 
                 long length = response.body().contentLength();
                 if (length == -1){
-                    callback.fail(HttpManager.CONTENT_LENGTH_ERROR_CODE," content length IS -1 ");
+                    callback.fail(HttpManager.CONTENT_LENGTH_ERROR_CODE," content length is -1 ");
                     return;
                 }
 
                 processDownload(url,length,callback);
+                finish(task);
 
             }
         });

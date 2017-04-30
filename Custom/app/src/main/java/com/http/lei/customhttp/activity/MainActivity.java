@@ -16,6 +16,11 @@ import com.http.lei.customhttp.http.HttpManager;
 import com.http.lei.customhttp.utils.Logger;
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+
 import okhttp3.FormBody;
 import okhttp3.Headers;
 import okhttp3.HttpUrl;
@@ -67,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()){
             case R.id.btnShow:
 
+                test();
                 /*getHttp();
 
                 postHttp();
@@ -95,6 +101,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 break;
         }
+    }
+
+    private void test() {
+        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(2,4,60, TimeUnit.MILLISECONDS,new ArrayBlockingQueue<Runnable>(10));
+
     }
 
     /**
