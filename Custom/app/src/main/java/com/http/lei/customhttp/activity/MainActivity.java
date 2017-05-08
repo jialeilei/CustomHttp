@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.http.lei.customhttp.R;
 import com.http.lei.customhttp.http.DownloadCallback;
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView tvContent;
     private Button btnShow,btnSync,btnAsync;
     private ImageView imgShow;
+    private ProgressBar mProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +62,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnAsync = (Button) findViewById(R.id.btnAsync);
         btnAsync.setOnClickListener(this);
         imgShow = (ImageView) findViewById(R.id.imgShow);
+        mProgressBar = (ProgressBar) findViewById(R.id.progress);
+        mProgressBar.setMax(100);
+        mProgressBar.setProgress(0);
 
         /*File file = FileStorageManager.getInstance().getFileByName("http://www.imooc.com");
         Logger.d(TAG,"file path "+file.getAbsolutePath());*/
@@ -72,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()){
             case R.id.btnShow:
 
-                test();
+                //test();
                 /*getHttp();
 
                 postHttp();
@@ -108,35 +113,44 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    private int count = 0;
     /**
      * 多线程下载
      */
     private void download() {
-        DownloadManager.getInstance().download("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1493821245&di=c3e0379c7e9c509739a9f75943b30461&imgtype=jpg&er=1&src=http%3A%2F%2Fwww.jlonline.com%2Fd%2Ffile%2Fyule%2Fdianying%2F20170405%2F2e97cd958637abd4bfffdceb772c40d2.jpg",
-                new DownloadCallback() {
-            @Override
-            public void success(File file) {
+        DownloadManager.getInstance()
+                //.download("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1493821245&di=c3e0379c7e9c509739a9f75943b30461&imgtype=jpg&er=1&src=http%3A%2F%2Fwww.jlonline.com%2Fd%2Ffile%2Fyule%2Fdianying%2F20170405%2F2e97cd958637abd4bfffdceb772c40d2.jpg",
+                .download("http://msoftdl.360.cn/mobilesafe/shouji360/360safe/500192/360MobileSafe.apk",
+                        new DownloadCallback() {
+                            @Override
+                            public void success(File file) {
 
-                final Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        imgShow.setImageBitmap(bitmap);
-                    }
-                });
-                Logger.d(TAG,"success "+file.getAbsolutePath());
-            }
+                                if (count < 1) {
+                                    count++;
+                                    return;
+                                }
+                                final Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        //imgShow.setImageBitmap(bitmap);
+                                        tvContent.setText("success");
+                                    }
+                                });
+                                Logger.d(TAG, "success " + file.getAbsolutePath());
+                            }
 
-            @Override
-            public void fail(int errorCode, String errorMessage) {
-                Logger.d(TAG,"fail   errorCode:"+errorCode + " errorMessage:"+ errorMessage);
-            }
+                            @Override
+                            public void fail(int errorCode, String errorMessage) {
+                                Logger.d(TAG, "fail   errorCode:" + errorCode + " errorMessage:" + errorMessage);
+                            }
 
-            @Override
-            public void progress(int progress) {
-
-            }
-        });
+                            @Override
+                            public void progress(int progress) {
+                                Logger.d(TAG, "progress " + progress);
+                                mProgressBar.setProgress(progress);
+                            }
+                        });
     }
 
     /**
@@ -147,7 +161,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         HttpManager.getInstance().asyncRequest("http://img.mukewang.com/567ca60000011fae26501720-200-200.jpg", new DownloadCallback() {
                     @Override
                     public void success(File file) {
-                        Logger.d(TAG, "success " + file.getAbsolutePath());
+                        //Logger.d(TAG, "success " + file.getAbsolutePath());
                         final Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
                         runOnUiThread(new Runnable() {
                             @Override
@@ -164,6 +178,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     @Override
                     public void progress(int progress) {
+
+
 
                     }
                 });

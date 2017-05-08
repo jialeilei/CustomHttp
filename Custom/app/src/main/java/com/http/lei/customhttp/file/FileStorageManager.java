@@ -30,7 +30,7 @@ public class FileStorageManager {
 
     public File getFileByName(String url){
         File parent;
-        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
+        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){//是否有储存卡
             parent = mContext.getExternalCacheDir();
         }else {
             parent = mContext.getCacheDir();

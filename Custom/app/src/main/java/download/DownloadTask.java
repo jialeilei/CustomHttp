@@ -1,4 +1,4 @@
-package com.http.lei.customhttp;
+package download;
 
 import com.http.lei.customhttp.http.DownloadCallback;
 

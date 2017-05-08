@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Custom.iml" filepath="$PROJECT_DIR$/Custom.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dbgenerate/dbgenerate.iml" filepath="$PROJECT_DIR$/dbgenerate/dbgenerate.iml" />
+      <module fileurl="file://$PROJECT_DIR$/filedownload/filedownload.iml" filepath="$PROJECT_DIR$/filedownload/filedownload.iml" />
     </modules>
   </component>
 </project>

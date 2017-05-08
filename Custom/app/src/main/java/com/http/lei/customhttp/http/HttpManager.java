@@ -66,6 +66,7 @@ public class HttpManager {
 
     /**
      * 同步请求
+     * 请求头中加入Range
      * @param url
      * @return
      */
@@ -125,6 +126,7 @@ public class HttpManager {
 
 
     /**
+     * 进行多线程下载
      * @param url
      * @param callback
      */
@@ -146,7 +148,7 @@ public class HttpManager {
                     //callback.onFailure(call,response);
                 }
 
-                File file = FileStorageManager.getInstance().getFileByName(url);
+               /* File file = FileStorageManager.getInstance().getFileByName(url);
 
                 byte[] buffer = new byte[1024*500];//500kb
                 int len;
@@ -155,7 +157,7 @@ public class HttpManager {
                 while ((len = inputStream.read(buffer,0,buffer.length)) != -1){
                     outputStream.write(buffer,0,len);
                     outputStream.flush();
-                }
+                }*/
 
                 callback.onResponse(call,response);
             }
