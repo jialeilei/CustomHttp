@@ -2,6 +2,7 @@ package com.http.lei.customhttp.application;
 
 import com.facebook.stetho.Stetho;
 import com.http.lei.customhttp.file.FileStorageManager;
+import com.http.lei.customhttp.http.DownloadManager;
 import com.http.lei.customhttp.http.HttpManager;
 import download.db.DownloadHelper;
 
@@ -14,9 +15,10 @@ public class Application extends android.app.Application {
     public void onCreate() {
         super.onCreate();
         FileStorageManager.getInstance().init(this);
-        HttpManager.getInstance().init(this);
+        HttpManager.Holder.getInstance().init(this);
         //DownloadManager.getInstance().init(this);
         DownloadHelper.getInstance().init(this);
         Stetho.initializeWithDefaults(this);
+
     }
 }

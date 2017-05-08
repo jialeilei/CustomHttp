@@ -49,7 +49,7 @@ public class DownloadRunnable implements Runnable {
     public void run() {
 
         android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
-        Response response = HttpManager.getInstance().syncRequestByRange(mUrl, mStart, mEnd);
+        Response response = HttpManager.Holder.getInstance().syncRequestByRange(mUrl, mStart, mEnd);
         if (response == null && mCallback != null){
             mCallback.fail(HttpManager.NETWORK_ERROR_CODE,"network is error");
             return;

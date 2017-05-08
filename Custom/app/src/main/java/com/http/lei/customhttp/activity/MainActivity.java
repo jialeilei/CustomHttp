@@ -118,7 +118,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * 多线程下载
      */
     private void download() {
-        DownloadManager.getInstance()
+        DownloadManager.Holder.getInstance()
+        //DownloadManager.getInstance()
                 //.download("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1493821245&di=c3e0379c7e9c509739a9f75943b30461&imgtype=jpg&er=1&src=http%3A%2F%2Fwww.jlonline.com%2Fd%2Ffile%2Fyule%2Fdianying%2F20170405%2F2e97cd958637abd4bfffdceb772c40d2.jpg",
                 .download("http://msoftdl.360.cn/mobilesafe/shouji360/360safe/500192/360MobileSafe.apk",
                         new DownloadCallback() {
@@ -158,7 +159,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      */
     private void asyncRequest() {
 
-        HttpManager.getInstance().asyncRequest("http://img.mukewang.com/567ca60000011fae26501720-200-200.jpg", new DownloadCallback() {
+        HttpManager.Holder.getInstance().asyncRequest("http://img.mukewang.com/567ca60000011fae26501720-200-200.jpg", new DownloadCallback() {
                     @Override
                     public void success(File file) {
                         //Logger.d(TAG, "success " + file.getAbsolutePath());

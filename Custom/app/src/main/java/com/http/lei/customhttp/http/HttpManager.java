@@ -27,10 +27,28 @@ public class HttpManager {
 
     private OkHttpClient mClient;
 
-    private static final HttpManager sManager = new HttpManager();
+    private static HttpManager sManager;
 
-    public static HttpManager getInstance(){
+   /* public static HttpManager getInstance(){
+        if (sManager == null){
+            synchronized (HttpManager.class){
+                if (sManager == null){
+                    sManager = new HttpManager();
+                }
+            }
+            return sManager;
+        }
         return sManager;
+    }*/
+
+    /**
+     *
+     */
+    public static class Holder{
+        private static HttpManager sManager = new HttpManager();
+        public static HttpManager getInstance(){
+            return sManager;
+        }
     }
 
     private HttpManager(){
@@ -144,21 +162,8 @@ public class HttpManager {
             public void onResponse(Call call, Response response) throws IOException {
 
                 if (!response.isSuccessful() && callback != null){
-
                     //callback.onFailure(call,response);
                 }
-
-               /* File file = FileStorageManager.getInstance().getFileByName(url);
-
-                byte[] buffer = new byte[1024*500];//500kb
-                int len;
-                FileOutputStream outputStream = new FileOutputStream(file);
-                InputStream inputStream = response.body().byteStream();
-                while ((len = inputStream.read(buffer,0,buffer.length)) != -1){
-                    outputStream.write(buffer,0,len);
-                    outputStream.flush();
-                }*/
-
                 callback.onResponse(call,response);
             }
         });

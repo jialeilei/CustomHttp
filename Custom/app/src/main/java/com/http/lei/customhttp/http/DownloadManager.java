@@ -59,8 +59,35 @@ public class DownloadManager {
         }
     });
 
-    public static DownloadManager getInstance(){
-         return sManager = new DownloadManager();
+    /**
+     * 单例模式 1
+     * double check,会发生原子性错误
+     */
+    /*public static DownloadManager getInstance(){
+
+        if (sManager == null){
+            synchronized (DownloadManager.class){
+                if (sManager == null){
+                    sManager = new DownloadManager();//(java重排序)1分配内存   2、调用其构造方法进行初始化  3、引用赋值，指向内存分配区域
+                }
+            }
+            return sManager;
+        }
+        return sManager;
+    }*/
+
+    /**
+     * 单例模式 2
+     * 静态内部类，起到延时加载作用，创建的原子性
+     */
+    public static class Holder{
+
+        private static DownloadManager sManager = new DownloadManager();
+
+        public static DownloadManager getInstance(){
+            return sManager;
+        }
+
     }
 
     private DownloadManager(){}
@@ -86,7 +113,7 @@ public class DownloadManager {
 
         if (mCache == null || mCache.size() == 0){
             Logger.i("Logger","处理未下载过的数据");
-            HttpManager.getInstance().asyncRequest(url,new Callback(){
+            HttpManager.Holder.getInstance().asyncRequest(url,new Callback(){
                 @Override
                 public void onFailure(Call call, IOException e) {
 
