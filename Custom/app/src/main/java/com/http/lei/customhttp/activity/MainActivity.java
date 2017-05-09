@@ -110,7 +110,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void test() {
         ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(2,4,60, TimeUnit.MILLISECONDS,new ArrayBlockingQueue<Runnable>(10));
-
     }
 
     private int count = 0;
@@ -197,7 +196,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("name","jack")
                 .addFormDataPart("filename", "picture.jpg", requestBody).build();
-
         Request request = new Request.Builder().url("http://localhost:8080/web/upload").post(body).build();
         try {
             Response response = client.newCall(request).execute();
@@ -214,12 +212,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void postHttp() {
 
         OkHttpClient client = new OkHttpClient();
-
         FormBody formBody = new FormBody.Builder()
                 .add("username", "lei")
                 .add("userage", "123456")
                 .build();
-
         Request request = new Request.Builder().post(formBody).url("").build();
         try {
             Response response = client.newCall(request).execute();
@@ -241,7 +237,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .addQueryParameter("city","beijing")
                 .addQueryParameter("key","")
                 .build();
-
+      /*  HttpUrl httpUrl = HttpUrl.parse("http://api.heweather.com/x3/weather").newBuilder()
+                .addQueryParameter("city","beijing")
+                .addQueryParameter("key","")
+                .host("http://api.heweather.com/")
+                .port(8080)
+                .build();
+*/
         Log.i(TAG,"url.toString() "+httpUrl.toString());
         Request request = new Request.Builder().url(httpUrl).build();
 

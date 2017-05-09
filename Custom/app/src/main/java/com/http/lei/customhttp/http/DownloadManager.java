@@ -37,27 +37,36 @@ public class DownloadManager {
 
     private List<DownloadEntity> mCache;
 
-    private final static int CORE_POOL_SIZE = 2;
+    public final static int CORE_POOL_SIZE = 2;
 
-    private final static int MAX_POOL_SIZE = 2;
+    public final static int MAX_POOL_SIZE = 2;
+
+    public final static int PROGRESS_POOL_SIZE = 1;
 
     private long mLength;
 
     private static final String TAG = "DownloadManager";
 
-    private static final ExecutorService sLocalProgressPool = Executors.newFixedThreadPool(1);
+    private static ExecutorService sLocalProgressPool;
 
-    private final static ThreadPoolExecutor sThreadPool = new ThreadPoolExecutor(CORE_POOL_SIZE,MAX_POOL_SIZE,60, TimeUnit.MILLISECONDS,
-            new LinkedBlockingDeque<Runnable>(), new ThreadFactory(){
+    private static ThreadPoolExecutor sThreadPool;
 
-        private AtomicInteger mInteger = new AtomicInteger(1);
-        @Override
-        public Thread newThread(Runnable r) {
-            Thread thread = new Thread(r,"download thread #" + mInteger.getAndIncrement());
-            Log.i(TAG,"thread name: "+thread.getName());
-            return thread;
-        }
-    });
+
+    public void init(DownloadConfig config){
+
+        sLocalProgressPool = Executors.newFixedThreadPool(config.getLocalProgressThreadSize());
+        sThreadPool = new ThreadPoolExecutor(config.getCoreThreadSize(),config.getMaxThreadSize(),60, TimeUnit.MILLISECONDS,
+                new LinkedBlockingDeque<Runnable>(), new ThreadFactory(){
+
+            private AtomicInteger mInteger = new AtomicInteger(1);
+            @Override
+            public Thread newThread(Runnable r) {
+                Thread thread = new Thread(r,"download thread #" + mInteger.getAndIncrement());
+                Log.i(TAG,"thread name: "+thread.getName());
+                return thread;
+            }
+        });
+    }
 
     /**
      * 单例模式 1
