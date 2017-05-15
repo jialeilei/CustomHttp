@@ -15,8 +15,11 @@ import com.http.lei.customhttp.http.DownloadCallback;
 import com.http.lei.customhttp.http.DownloadManager;
 import com.http.lei.customhttp.http.HttpManager;
 import com.http.lei.customhttp.utils.Logger;
+
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -86,7 +89,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 //asyncRequest();
 
-                download();
+                //download();
+
+                testCustom();
 
                 break;
             case R.id.btnSync:
@@ -106,6 +111,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 break;
         }
+    }
+
+    private void testCustom() {
+
+//        OkHttpClient client = new OkHttpClient();
+//        OkHttpRequest request = new OkHttpRequest(client, HttpMethod.GET,"http://www.baidu.com");
+//        HttpResponse response = request.execute();
+//
+//        String content = null;
+//        BufferedReader reader = new BufferedReader(new InputStreamReader(response.getBody()));
+//        while ((content = reader.readLine()) != null){
+//            System.out.println(content);
+//        }
+//        response.close();
+
+
+
     }
 
     private void test() {
