@@ -35,12 +35,21 @@ public enum HttpStatus {
 
     //500~~599服务器端错误
 
+
     private int mStatus;
     private String mMessage;
 
     private HttpStatus(int code,String message){
         this.mStatus = code;
         this.mMessage = message;
+    }
+
+    public boolean isSuccess(){
+        int value = mStatus / 100;
+        if (value == 2){
+            return true;
+        }
+        return false;
     }
 
     public static HttpStatus getValue(int value){

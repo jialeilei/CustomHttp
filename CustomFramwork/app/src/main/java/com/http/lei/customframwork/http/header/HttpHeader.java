@@ -25,7 +25,16 @@ public class HttpHeader implements NameValueMap<String, String> {
     public final static String CONTENT_ENCODING = "Content-Encoding";
     public final static String CONTENT_LENGTH = "Content-Length";
     public final static String CONNECTION = "Connection";
+    public final static String CONTENT_TYPE = "Connection";
 
+
+    public String getContentType() {
+        return get(CONTENT_TYPE);
+    }
+
+    public void setContentType(String value){
+        set(CONTENT_TYPE,value);
+    }
 
     public String getConnection(){
         return get(CONNECTION);

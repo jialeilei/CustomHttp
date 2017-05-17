@@ -19,7 +19,6 @@ public interface HttpResponse extends Header,Closeable {
 
     void close() throws IOException;
 
-
-
+    long getContentLength();
 
 }

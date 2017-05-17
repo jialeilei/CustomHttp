@@ -1,10 +1,11 @@
-package com.http.lei.customframwork.http.request;
+package com.http.lei.customframwork.http.okhttp;
 
 
 import com.http.lei.customframwork.http.HttpMethod;
 import com.http.lei.customframwork.http.header.HttpHeader;
+import com.http.lei.customframwork.http.request.BufferHttpRequest;
 import com.http.lei.customframwork.http.response.HttpResponse;
-import com.http.lei.customframwork.http.response.OkHttpResponse;
+
 import java.io.IOException;
 import java.net.URI;
 import java.util.Map;
@@ -23,7 +24,7 @@ public class OkHttpRequest extends BufferHttpRequest {
     private HttpMethod mMethod;
     private String mUrl;
 
-    
+
     private OkHttpRequest(OkHttpRequest.Builder builder){
         this.mClient = builder.client;
         this.mMethod = builder.method;
@@ -58,7 +59,7 @@ public class OkHttpRequest extends BufferHttpRequest {
     @Override
     protected HttpResponse executeInternal(HttpHeader header, byte[] data) throws IOException {
 
-        boolean isBody = mMethod == HttpMethod.POST;
+        boolean isBody = (mMethod == HttpMethod.POST);
         RequestBody requestBody = null;
         if (isBody){
             requestBody = RequestBody.create(MediaType.parse("application/x-www-form-urlencoded"),data);

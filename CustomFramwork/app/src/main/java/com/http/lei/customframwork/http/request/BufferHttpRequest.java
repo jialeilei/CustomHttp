@@ -1,8 +1,8 @@
 package com.http.lei.customframwork.http.request;
 
+
 import com.http.lei.customframwork.http.header.HttpHeader;
 import com.http.lei.customframwork.http.response.HttpResponse;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;

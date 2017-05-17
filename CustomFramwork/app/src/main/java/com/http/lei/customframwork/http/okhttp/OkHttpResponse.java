@@ -1,7 +1,9 @@
-package com.http.lei.customframwork.http.response;
+package com.http.lei.customframwork.http.okhttp;
 
 import com.http.lei.customframwork.http.HttpStatus;
 import com.http.lei.customframwork.http.header.HttpHeader;
+import com.http.lei.customframwork.http.response.AbstractHttpResponse;
+
 import java.io.InputStream;
 import okhttp3.Response;
 
@@ -47,5 +49,10 @@ public class OkHttpResponse extends AbstractHttpResponse {
             mHeader.set(name,mResponse.headers().get(name));
         }
         return mHeader;
+    }
+
+    @Override
+    public long getContentLength() {
+        return mResponse.body().contentLength();
     }
 }
