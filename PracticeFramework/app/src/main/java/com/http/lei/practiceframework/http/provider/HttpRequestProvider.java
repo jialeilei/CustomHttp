@@ -1,6 +1,5 @@
 package com.http.lei.practiceframework.http.provider;
 
-
 import com.http.lei.practiceframework.http.HttpRequestFactory;
 import com.http.lei.practiceframework.http.Method;
 import com.http.lei.practiceframework.http.origin.OriginRequestFactory;
@@ -13,7 +12,6 @@ import java.net.URI;
  * Created by lei on 2017/5/19.
  */
 public class HttpRequestProvider {
-
 
     private HttpRequestFactory factory;
 

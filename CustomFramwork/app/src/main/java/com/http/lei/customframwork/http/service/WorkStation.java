@@ -20,7 +20,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class WorkStation {
 
-    private static final int MAX_REQUEST_SIZE = 10;
+    private static final int MAX_REQUEST_SIZE = 20;
     private static final int MAXI_MUM_POOL_SIZE = 5;
     private static final int CORE_POOL_SIZE = 0;
 

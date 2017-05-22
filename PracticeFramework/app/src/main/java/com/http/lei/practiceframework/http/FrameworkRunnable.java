@@ -15,9 +15,7 @@ public class FrameworkRunnable implements Runnable {
     private Request request;
     private WorkStation station;
 
-
     public FrameworkRunnable(Request request,HttpRequest httpRequest,WorkStation station){
-
         this.httpRequest = httpRequest;
         this.request = request;
         this.station = station;
@@ -25,11 +23,9 @@ public class FrameworkRunnable implements Runnable {
 
     @Override
     public void run() {
-
         try {
             httpRequest.getBody().write(request.getData());
             HttpResponse response = httpRequest.execute();
-
             String contentType = response.getHeader().getContentType();
             request.setContentType(contentType);
 
@@ -37,8 +33,6 @@ public class FrameworkRunnable implements Runnable {
                 if (response.getBody() != null)
                 request.getResponse().success(request,new String(getData(response)));
             }
-
-
         } catch (IOException e) {
             e.printStackTrace();
         }finally {
