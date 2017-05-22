@@ -259,13 +259,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .addQueryParameter("city","beijing")
                 .addQueryParameter("key","")
                 .build();
-      /*  HttpUrl httpUrl = HttpUrl.parse("http://api.heweather.com/x3/weather").newBuilder()
-                .addQueryParameter("city","beijing")
-                .addQueryParameter("key","")
-                .host("http://api.heweather.com/")
-                .port(8080)
-                .build();
-*/
+
         Log.i(TAG,"url.toString() "+httpUrl.toString());
         Request request = new Request.Builder().url(httpUrl).build();
 

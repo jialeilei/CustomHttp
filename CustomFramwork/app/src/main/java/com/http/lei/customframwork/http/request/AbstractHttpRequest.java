@@ -63,4 +63,5 @@ public abstract class AbstractHttpRequest implements HttpRequest {
     }
 
     protected abstract HttpResponse executeInternal(HttpHeader mHeader) throws IOException;
+
 }

@@ -2,7 +2,6 @@ package com.http.lei.customframwork.http.header;
 
 
 import android.support.annotation.NonNull;
-
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;

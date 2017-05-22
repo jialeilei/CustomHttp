@@ -5,7 +5,7 @@ package com.http.lei.customframwork.http.service;
  */
 public abstract class FrameworkResponse<T> {
 
-    public abstract void success(FrameworkRequest request, T object);
+    public abstract void success(FrameworkRequest request, T data);
 
     public abstract void fail(int errorCode,String errorMsg);
 

@@ -19,8 +19,8 @@ public class OriginHttpRequest extends BufferHttpRequest {
 
 
     private HttpURLConnection mConnection;
-    private String mUrl;
     private HttpMethod mMethod;
+    private String mUrl;
 
 
     public OriginHttpRequest(HttpURLConnection connection,HttpMethod method,String url){

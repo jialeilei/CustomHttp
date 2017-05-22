@@ -17,6 +17,9 @@ public class FrameworkRequest {
 
     private String contentType;
 
+
+
+
     public String getContentType() {
         return contentType;
     }

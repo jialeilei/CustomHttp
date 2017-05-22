@@ -19,7 +19,6 @@ public class FrameworkApiProvider {
 
     private static final String ENCODE_UTF8 = "utf-8";
     private static WorkStation sWorkStation = new WorkStation();
-
     private static final List<Convert> sConverts = new ArrayList<>();
     static {
         sConverts.add(new JsonConvert());
@@ -28,12 +27,14 @@ public class FrameworkApiProvider {
     public static void helloWorld(String url,Map<String,String> value,FrameworkResponse response){
 
         FrameworkRequest request = new FrameworkRequest();
+
         WrapperResponse wrapperResponse = new WrapperResponse(response,sConverts);
 
         request.setUrl(url);
         request.setMethod(HttpMethod.POST);
         request.setData(encodeParam(value));
         request.setResponse(wrapperResponse);
+
         sWorkStation.add(request);
     }
 

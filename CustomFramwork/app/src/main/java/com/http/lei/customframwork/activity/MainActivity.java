@@ -12,15 +12,15 @@ import com.http.lei.customframwork.http.response.HttpResponse;
 import com.http.lei.customframwork.http.service.FrameworkApiProvider;
 import com.http.lei.customframwork.http.service.FrameworkRequest;
 import com.http.lei.customframwork.http.service.FrameworkResponse;
-import com.http.lei.customframwork.http.service.WrapperResponse;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
+import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void initView() {
+
         tvShow = (TextView) findViewById(R.id.tvShow);
 
     }
@@ -47,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
     private void initEvent(){
 
         //okHttpTest();
-
         originTest();
 
     }
@@ -60,12 +60,12 @@ public class MainActivity extends AppCompatActivity {
         FrameworkApiProvider.helloWorld(URL, map, new FrameworkResponse<Person>() {
             @Override
             public void success(FrameworkRequest request, Person object) {
-                Log.i(TAG,"success "+object.toString());
+                Log.i(TAG, "success " + object.toString());
             }
 
             @Override
             public void fail(int errorCode, String errorMsg) {
-                Log.i(TAG,"fail");
+                Log.i(TAG, "fail");
             }
         });
 
@@ -94,6 +94,12 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }).start();
+    }
+
+    private void okHttp(){
+
+        Request request = new Request.Builder().url(URL).get().build();
+
     }
 
 

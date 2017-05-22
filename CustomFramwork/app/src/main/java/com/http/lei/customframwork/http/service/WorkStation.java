@@ -21,8 +21,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class WorkStation {
 
     private static final int MAX_REQUEST_SIZE = 10;
+    private static final int MAXI_MUM_POOL_SIZE = 5;
+    private static final int CORE_POOL_SIZE = 0;
 
-    private static final ThreadPoolExecutor sThreadPool = new ThreadPoolExecutor(0, Integer.MAX_VALUE, 60, TimeUnit.SECONDS, new LinkedBlockingDeque<Runnable>(), new ThreadFactory() {
+    private static final ThreadPoolExecutor sThreadPool = new ThreadPoolExecutor(CORE_POOL_SIZE, MAXI_MUM_POOL_SIZE, 60, TimeUnit.SECONDS, new LinkedBlockingDeque<Runnable>(), new ThreadFactory() {
 
         private AtomicInteger integer = new AtomicInteger();
 
@@ -55,7 +57,7 @@ public class WorkStation {
     }
 
     private void doHttpRequest(FrameworkRequest request){
-        HttpRequest httpRequest = null;
+        HttpRequest httpRequest = null;//uri、method
         try {
             httpRequest = mProvider.getHttpRequest(URI.create(request.getUrl()),request.getMethod());
             sThreadPool.execute(new FrameworkRunnable(httpRequest,request,this));

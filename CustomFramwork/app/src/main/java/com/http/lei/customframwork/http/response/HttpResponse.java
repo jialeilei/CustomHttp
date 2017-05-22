@@ -11,13 +11,15 @@ import java.io.InputStream;
  */
 public interface HttpResponse extends Header,Closeable {
 
-    HttpStatus getStatus();
-
-    String getStatusMsg();
-
     InputStream getBody() throws IOException;
 
     void close() throws IOException;
+
+
+
+    HttpStatus getStatus();
+
+    String getStatusMsg();
 
     long getContentLength();
 
