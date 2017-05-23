@@ -19,9 +19,6 @@ public interface HttpResponse extends Closeable,Header {
     void close() throws IOException;
 
 
-
-
-
     String getStatusMsg();
 
     HttpStatus getStatus();

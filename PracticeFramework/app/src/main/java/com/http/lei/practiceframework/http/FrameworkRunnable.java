@@ -2,7 +2,6 @@ package com.http.lei.practiceframework.http;
 
 import com.http.lei.practiceframework.http.request.HttpRequest;
 import com.http.lei.practiceframework.http.response.HttpResponse;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
@@ -41,6 +40,7 @@ public class FrameworkRunnable implements Runnable {
 
     }
 
+
     private byte[] getData(HttpResponse response) throws IOException {
         ByteArrayOutputStream stream = new ByteArrayOutputStream((int) response.getContentLength());
         int length;
@@ -50,5 +50,6 @@ public class FrameworkRunnable implements Runnable {
         }
         return stream.toByteArray();
     }
+
 
 }

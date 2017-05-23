@@ -54,7 +54,7 @@ public class OriginHttpResponse extends AbstractHttpResponse {
         for (Map.Entry<String, List<String>> entry : mConnection.getHeaderFields().entrySet()) {
             header.set(entry.getKey(),entry.getValue().get(0));
         }
-        return null;
+        return header;
     }
 
     @Override

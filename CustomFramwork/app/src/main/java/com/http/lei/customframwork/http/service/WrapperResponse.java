@@ -48,4 +48,5 @@ public class WrapperResponse extends FrameworkResponse<String> {
     public void fail(int errorCode, String errorMsg) {
         mResponse.fail(errorCode, errorMsg);
     }
+
 }

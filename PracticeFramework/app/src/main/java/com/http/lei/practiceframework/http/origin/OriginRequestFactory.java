@@ -21,4 +21,12 @@ public class OriginRequestFactory implements HttpRequestFactory{
         return new OriginHttpRequest(connection,method,uri.toString());
     }
 
+    public void setReadTimeout(int timeout){
+        connection.setReadTimeout(timeout);
+    }
+
+    public void setConnectionTimeout(int timeout){
+        connection.setConnectTimeout(timeout);
+    }
+
 }

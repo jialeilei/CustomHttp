@@ -18,20 +18,26 @@ public class ApiProvider {
 
     private static WorkStation sWorkStation = new WorkStation();
 
-    public static void post(String url,Map<String,String> value,Response response){
+    public static void post(String url,Map<String,String> value,Response response) {
 
         Request request = new Request.Builder().url(url).
                 method(Method.POST).
                 data(encodeParam(value)).
                 response(response).
                 build();
-        sWorkStation.add(request);
+        /*Request request = new Request();
+        request.setUrl(url);
+        request.setMethod(Method.POST);
+        request.setData(encodeParam(value));
+        request.setResponse(response);*/
 
+        sWorkStation.add(request);
     }
 
 
-    private static byte[] encodeParam(Map<String, String> value) {
 
+
+    private static byte[] encodeParam(Map<String, String> value) {
         if (value == null || value.size() == 0){
             return null;
         }
@@ -49,10 +55,8 @@ public class ApiProvider {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-
         return buffer.toString().getBytes();
     }
-
 
 
 }

@@ -28,4 +28,6 @@ public abstract class BufferHttpRequest extends AbstractHttpRequest {
     protected OutputStream getBodyOutputStream() {
         return stream;
     }
+
+
 }

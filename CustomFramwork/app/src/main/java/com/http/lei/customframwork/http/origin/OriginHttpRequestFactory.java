@@ -32,7 +32,6 @@ public class OriginHttpRequestFactory implements HttpRequestFactory {
 
     @Override
     public HttpRequest createHttpRequest(URI uri, HttpMethod method) throws IOException{
-
         mConnection = (HttpURLConnection) uri.toURL().openConnection();
         return new OriginHttpRequest(mConnection,method,uri.toString());
     }

@@ -44,17 +44,21 @@ public class OriginHttpRequest extends BufferHttpRequest {
             stream.close();
         }
         OriginHttpResponse response = new OriginHttpResponse(mConnection);
-
         return response;
     }
+
 
     @Override
     public HttpMethod getMethod() {
         return null;
     }
 
+
     @Override
     public URI getUri() {
         return null;
     }
+
+
+
 }

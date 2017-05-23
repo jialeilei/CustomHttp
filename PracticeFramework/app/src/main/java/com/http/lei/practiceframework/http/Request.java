@@ -16,7 +16,7 @@ public class Request {
 
     private String contentType;
 
-   /* private Request(Builder builder){
+    private Request(Builder builder){
         url = builder.getUrl();
         method = builder.getMethod();
         data = builder.getData();
@@ -78,7 +78,7 @@ public class Request {
         public String getContentType() {
             return contentType;
         }
-    }*/
+    }
 
     public void setUrl(String url) {
         this.url = url;

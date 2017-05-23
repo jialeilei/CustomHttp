@@ -4,7 +4,6 @@ import com.http.lei.practiceframework.http.Method;
 import com.http.lei.practiceframework.http.header.HttpHeader;
 import com.http.lei.practiceframework.http.request.BufferHttpRequest;
 import com.http.lei.practiceframework.http.response.HttpResponse;
-
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
@@ -16,14 +15,14 @@ import java.util.Map;
  */
 public class OriginHttpRequest extends BufferHttpRequest {
 
-    private String mUrl;
+    private String mUri;
     private HttpURLConnection mConnection;
     private Method mMethod;
 
-    public OriginHttpRequest(HttpURLConnection connection,Method method,String url){
+    public OriginHttpRequest(HttpURLConnection connection,Method method,String uri){
         mConnection = connection;
         mMethod = method;
-        mUrl = url;
+        mUri = uri;
     }
 
     @Override
@@ -40,6 +39,7 @@ public class OriginHttpRequest extends BufferHttpRequest {
             stream.write(data,0,data.length);
             stream.close();
         }
+
         OriginHttpResponse response = new OriginHttpResponse(mConnection);
         return response;
     }
@@ -47,13 +47,13 @@ public class OriginHttpRequest extends BufferHttpRequest {
 
     @Override
     public Method getMethod() {
-        return null;
+        return mMethod;
     }
 
 
     @Override
     public URI getUri() {
-        return null;
+        return URI.create(mUri);
     }
 
 }

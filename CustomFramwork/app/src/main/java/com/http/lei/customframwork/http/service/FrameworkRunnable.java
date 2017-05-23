@@ -25,12 +25,9 @@ public class FrameworkRunnable implements Runnable {
 
     @Override
     public void run() {
-
         try {
             mHttpRequest.getBody().write(mRequest.getData());
             HttpResponse response = mHttpRequest.execute();
-
-
             String contentType = response.getHeader().getContentType();
             mRequest.setContentType(contentType);
 

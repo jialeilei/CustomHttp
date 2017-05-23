@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-
 /**
  * Created by lei on 2017/5/16.
  */
@@ -40,11 +39,9 @@ public class FrameworkApiProvider {
 
 
     public static byte[] encodeParam(Map<String,String> value){
-
         if (value == null || value.size() == 0){
             return null;
         }
-
         StringBuffer buffer = new StringBuffer();
         int count = 0;
         try {
@@ -60,7 +57,6 @@ public class FrameworkApiProvider {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-
         return buffer.toString().getBytes();
     }
 
