@@ -11,7 +11,6 @@ import java.net.HttpURLConnection;
 import java.net.URI;
 import java.util.Map;
 
-
 /**
  * Created by lei on 2017/5/16.
  */
@@ -44,6 +43,9 @@ public class OriginHttpRequest extends BufferHttpRequest {
             stream.close();
         }
         OriginHttpResponse response = new OriginHttpResponse(mConnection);
+
+        System.out.println("origin http "+response.getBody().toString());
+
         return response;
     }
 

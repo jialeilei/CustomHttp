@@ -25,16 +25,16 @@ public class FrameworkApiProvider {
 
     public static void helloWorld(String url,Map<String,String> value,FrameworkResponse response){
 
+        System.out.println("doHttpRequest: -1");
         FrameworkRequest request = new FrameworkRequest();
 
         WrapperResponse wrapperResponse = new WrapperResponse(response,sConverts);
-
         request.setUrl(url);
         request.setMethod(HttpMethod.POST);
         request.setData(encodeParam(value));
         request.setResponse(wrapperResponse);
-
         sWorkStation.add(request);
+
     }
 
 

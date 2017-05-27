@@ -15,6 +15,7 @@ public abstract class AbstractHttpResponse implements HttpResponse {
     private InputStream mGzipInputStream;
 
 
+
     @Override
     public void close() throws IOException {
         if (mGzipInputStream != null){
@@ -31,6 +32,7 @@ public abstract class AbstractHttpResponse implements HttpResponse {
         return false;
     }
 
+
     @Override
     public InputStream getBody() throws IOException {
         InputStream body = getBodyInternal();
@@ -40,9 +42,10 @@ public abstract class AbstractHttpResponse implements HttpResponse {
         return body;
     }
 
+
     private InputStream getBodyGzip(InputStream body) throws IOException {
         if (this.mGzipInputStream == null){
-            mGzipInputStream = new GZIPInputStream(body);
+            this.mGzipInputStream = new GZIPInputStream(body);
         }
         return mGzipInputStream;
     }

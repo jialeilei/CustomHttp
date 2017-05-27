@@ -18,11 +18,13 @@ public class HttpRequestProvider  {
 
     public HttpRequestProvider(){
 
-        if (OK_HTTP_REQUEST){
+        mHttpRequestFactory = new OkHttpRequestFactory();
+
+        /*if (OK_HTTP_REQUEST){
             mHttpRequestFactory = new OkHttpRequestFactory();
         }else {
             mHttpRequestFactory = new OriginHttpRequestFactory();
-        }
+        }*/
     }
 
     public HttpRequest getHttpRequest(URI uri,HttpMethod method) throws IOException{

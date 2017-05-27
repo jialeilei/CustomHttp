@@ -21,10 +21,12 @@ public class FrameworkRunnable implements Runnable {
         this.mHttpRequest = httpRequest;
         this.mRequest = request;
         this.mWorkStation = station;
+        System.out.println("runnable");
     }
 
     @Override
     public void run() {
+        System.out.println("run");
         try {
             mHttpRequest.getBody().write(mRequest.getData());
             HttpResponse response = mHttpRequest.execute();
@@ -35,6 +37,8 @@ public class FrameworkRunnable implements Runnable {
                 if (mRequest.getResponse() != null){
                     mRequest.getResponse().success(mRequest,new String(getData(response)));
                 }
+            }else {//new add 2017/5/25
+                mRequest.getResponse().fail(100,"error");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -43,6 +47,7 @@ public class FrameworkRunnable implements Runnable {
         }
 
     }
+
 
     public byte[] getData(HttpResponse response) throws IOException {
 

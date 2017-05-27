@@ -17,9 +17,7 @@ public class OriginHttpRequestFactory implements HttpRequestFactory {
 
     private HttpURLConnection mConnection;
 
-    public OriginHttpRequestFactory(){
-
-    }
+    public OriginHttpRequestFactory(){}
 
     public void setReadTimeOut(int timeOut){
         mConnection.setReadTimeout(timeOut);

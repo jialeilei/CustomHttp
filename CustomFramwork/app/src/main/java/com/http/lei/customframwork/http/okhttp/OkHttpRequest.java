@@ -5,6 +5,7 @@ import com.http.lei.customframwork.http.HttpMethod;
 import com.http.lei.customframwork.http.header.HttpHeader;
 import com.http.lei.customframwork.http.request.BufferHttpRequest;
 import com.http.lei.customframwork.http.response.HttpResponse;
+import com.http.lei.customframwork.util.LogTool;
 
 import java.io.IOException;
 import java.net.URI;
@@ -56,10 +57,11 @@ public class OkHttpRequest extends BufferHttpRequest {
         }
     }
 
+
     @Override
     protected HttpResponse executeInternal(HttpHeader header, byte[] data) throws IOException {
 
-        boolean isBody = (mMethod == HttpMethod.POST);
+        boolean isBody = (mMethod == HttpMethod.POST);//boolean isBody = mMethod == HttpMethod.POST;
         RequestBody requestBody = null;
         if (isBody){
             requestBody = RequestBody.create(MediaType.parse("application/x-www-form-urlencoded"),data);
@@ -72,6 +74,7 @@ public class OkHttpRequest extends BufferHttpRequest {
 
         Response response = mClient.newCall(builder.build()).execute();
 
+        System.out.println("lei "+response.body().contentLength());
         return new OkHttpResponse(response);
     }
 

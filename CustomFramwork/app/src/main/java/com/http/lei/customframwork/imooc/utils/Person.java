@@ -1,4 +1,4 @@
-package com.http.lei.customframwork.activity;
+package com.http.lei.customframwork.imooc.utils;
 
 /**
  * Created by lei on 2017/5/17.

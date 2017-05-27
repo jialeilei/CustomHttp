@@ -1,8 +1,8 @@
-package com.http.lei.customframwork.http.origin;
+package com.http.lei.customframwork.imooc;
 
-import com.http.lei.customframwork.http.HttpStatus;
-import com.http.lei.customframwork.http.header.HttpHeader;
-import com.http.lei.customframwork.http.response.AbstractHttpResponse;
+import com.http.lei.customframwork.imooc.http.HttpHeader;
+import com.http.lei.customframwork.imooc.http.HttpStatus;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -10,17 +10,16 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by lei on 2017/5/16.
+ * @author nate
  */
-public class OriginHttpResponse extends AbstractHttpResponse {
 
+public class OriginHttpResponse extends AbstractHttpResponse {
 
     private HttpURLConnection mConnection;
 
-    public OriginHttpResponse(HttpURLConnection connection){
+    public OriginHttpResponse(HttpURLConnection connection) {
         this.mConnection = connection;
     }
-
 
     @Override
     public HttpStatus getStatus() {
@@ -43,18 +42,10 @@ public class OriginHttpResponse extends AbstractHttpResponse {
     }
 
     @Override
-    public InputStream getBody() throws IOException {
-        return mConnection.getInputStream();
+    public long getContentLength() {
+        return mConnection.getContentLength();
     }
 
-    @Override
-    public HttpHeader getHeader() {
-        HttpHeader header = new HttpHeader();
-        for (Map.Entry<String, List<String>> entry : mConnection.getHeaderFields().entrySet()) {
-            header.set(entry.getKey(),entry.getValue().get(0));
-        }
-        return header;
-    }
 
     @Override
     protected InputStream getBodyInternal() throws IOException {
@@ -64,10 +55,16 @@ public class OriginHttpResponse extends AbstractHttpResponse {
     @Override
     protected void closeInternal() {
         mConnection.disconnect();
+
     }
 
     @Override
-    public long getContentLength() {
-        return mConnection.getContentLength();
+    public HttpHeader getHeaders() {
+
+        HttpHeader header = new HttpHeader();
+        for (Map.Entry<String, List<String>> entry : mConnection.getHeaderFields().entrySet()) {
+            header.set(entry.getKey(), entry.getValue().get(0));
+        }
+        return header;
     }
 }

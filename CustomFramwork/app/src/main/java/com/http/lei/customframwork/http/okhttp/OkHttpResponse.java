@@ -3,7 +3,6 @@ package com.http.lei.customframwork.http.okhttp;
 import com.http.lei.customframwork.http.HttpStatus;
 import com.http.lei.customframwork.http.header.HttpHeader;
 import com.http.lei.customframwork.http.response.AbstractHttpResponse;
-
 import java.io.InputStream;
 import okhttp3.Response;
 
@@ -39,6 +38,7 @@ public class OkHttpResponse extends AbstractHttpResponse {
     public String getStatusMsg() {
         return mResponse.message();
     }
+
 
     @Override
     public HttpHeader getHeader() {

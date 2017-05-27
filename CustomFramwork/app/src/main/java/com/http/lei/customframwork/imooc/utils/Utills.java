@@ -1,0 +1,22 @@
+package com.http.lei.customframwork.imooc.utils;
+
+/**
+ * @author nate
+ */
+
+public class Utills {
+
+
+    public static boolean isExist(String className, ClassLoader loader) {
+        try {
+            Class.forName(className);
+            return true;
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
+
+}
