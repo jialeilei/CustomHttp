@@ -30,20 +30,26 @@ public class HttpRunnable implements Runnable {
         try {
             mHttpRequest.getBody().write(mRequest.getData());
             HttpResponse response = mHttpRequest.execute();
+            System.out.println("finish execute");
             String contentType = response.getHeaders().getContentType();
             mRequest.setContentType(contentType);
             if (response.getStatus().isSuccess()) {
                 if (mRequest.getResponse() != null) {
+                    System.out.println("1");
                     mRequest.getResponse().success(mRequest, new String(getData(response)));
+                }else {
+                    System.out.println("2");
+                    mRequest.getResponse().success(mRequest, "null");
                 }
-
+            }else {
+                mRequest.getResponse().fail(103,response.getStatusMsg());
+                System.out.println("http fail "+response.getStatusMsg());
             }
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
             mWorkStation.finish(mRequest);
         }
-
 
     }
 

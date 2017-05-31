@@ -53,7 +53,7 @@ public enum HttpStatus {
     private String mMessage;
 
 
-    private HttpStatus(int code, String message) {
+    HttpStatus(int code, String message) {
         this.mCode = code;
         this.mMessage = message;
     }

@@ -28,7 +28,7 @@ import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
     private static final String URL_BAIDU = "https://www.baidu.com";
-    private static final String URL = "http://10.0.0.15/bbsServer/login.php";
+    private static final String URL = "http://10.0.0.27/bbsServer/login.php";
     private TextView tvShow;
     private Button btnOk,btnOrigin;
 
