@@ -43,7 +43,6 @@ public class MoocApiProvider {
                     buffer.append("&");
                 }
                 count++;
-
             }
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();

@@ -6,12 +6,19 @@
     android:orientation="vertical"
     tools:context=".activity.MainActivity">
 
+    <ImageView
+        android:id="@+id/imgShow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="100dp"
+        android:layout_marginLeft="100dp"/>
 
     <TextView
         android:id="@+id/tvShow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"/>
+
 
     <Button
         android:id="@+id/btnGet"
